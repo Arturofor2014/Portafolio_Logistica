@@ -86,7 +86,7 @@ if proyecto == "🏠  Presentación":
     <div class="hero-box">
       <div class="eyebrow">Portafolio de Proyectos · Data Analytics & Logística</div>
       <h1>Arturo <span>Aguilar</span></h1>
-      <div class="role">Senior Data Analyst · Especialista en Logística & Supply Chain</div>
+      <div class="role">Senior Commercial & Financial Analytics Engineer</div>
       <p class="bio">
         Más de <strong style="color:#1a1a2e">7 años</strong> de experiencia liderando proyectos analíticos de alto impacto,
         tanto en <strong style="color:#1a1a2e">iniciativas propias</strong> como dentro de empresas de logística, transporte
