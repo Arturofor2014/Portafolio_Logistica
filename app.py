@@ -58,7 +58,7 @@ st.markdown("""
 
 # ── SIDEBAR ───────────────────────────────────────────────────────────────────
 st.sidebar.markdown("### 👤 Arturo Aguilar")
-st.sidebar.caption("Senior Data Analyst · 7+ años")
+st.sidebar.caption("Senior Commercial & Financial Analytics Engineer · 7+ años")
 st.sidebar.divider()
 st.sidebar.markdown("**Navegación:**")
 
