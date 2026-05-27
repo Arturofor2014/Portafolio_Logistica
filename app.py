@@ -62,7 +62,7 @@ st.sidebar.caption("Senior Commercial & Financial Analytics Engineer · 7+ años
 st.sidebar.divider()
 st.sidebar.markdown("**Navegación:**")
 
-proyecto = st.sidebar.radio("", [
+proyecto = st.sidebar.radio("Sección", [
     "🏠  Presentación",
     "1 · KPIs de Flota",
     "2 · Desempeño Proveedores",
