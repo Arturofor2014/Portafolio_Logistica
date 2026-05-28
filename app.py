@@ -53,6 +53,21 @@ st.markdown("""
   /* Separador de sección */
   .sec-title { font-size: 22px; font-weight: 800; color: #1a1a2e; margin-bottom: 4px; }
   .sec-sub { font-size: 13px; color: #888; margin-bottom: 20px; }
+
+  /* Aviso móvil — solo visible en pantallas pequeñas */
+  .mobile-hint { display: none; }
+  @media(max-width: 768px) {
+    .mobile-hint {
+      display: block;
+      background: #EFF6FF;
+      border-left: 4px solid #4D93D9;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 13px;
+      color: #1a1a2e;
+      margin-bottom: 16px;
+    }
+  }
 </style>
 """, unsafe_allow_html=True)
 
@@ -77,6 +92,8 @@ proyecto = st.sidebar.radio("Sección", [
 
 st.sidebar.divider()
 st.sidebar.caption("🤖 Desarrollado con apoyo de IA")
+
+st.markdown('<div class="mobile-hint">☰ &nbsp;Toca la flecha <strong>▶</strong> arriba a la izquierda para expandir el menú de proyectos.</div>', unsafe_allow_html=True)
 
 st.divider()
 
