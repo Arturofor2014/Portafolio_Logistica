@@ -113,7 +113,6 @@ proyecto = st.sidebar.radio("Sección", [
 ])
 
 st.sidebar.divider()
-st.sidebar.caption("🤖 Desarrollado con apoyo de IA")
 
 st.divider()
 
