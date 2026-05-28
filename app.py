@@ -96,10 +96,10 @@ st.sidebar.caption("🤖 Desarrollado con apoyo de IA")
 components.html("""
 <script>
   window.addEventListener('load', function() {
-    if (window.parent.innerWidth <= 768) {
+    setTimeout(function() {
       var btn = window.parent.document.querySelector('[data-testid="collapsedControl"]');
       if (btn) btn.click();
-    }
+    }, 300);
   });
 </script>
 """, height=0)
