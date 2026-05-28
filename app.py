@@ -2,7 +2,8 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-st.set_page_config(page_title="Portafolio · Arturo Aguilar", layout="wide", page_icon="🚚")
+st.set_page_config(page_title="Portafolio · Arturo Aguilar", layout="wide", page_icon="🚚",
+                   initial_sidebar_state="expanded")
 
 st.markdown("""
 <style>
@@ -54,19 +55,17 @@ st.markdown("""
   .sec-title { font-size: 22px; font-weight: 800; color: #1a1a2e; margin-bottom: 4px; }
   .sec-sub { font-size: 13px; color: #888; margin-bottom: 20px; }
 
-  /* Aviso móvil — solo visible en pantallas pequeñas */
-  .mobile-hint { display: none; }
   @media(max-width: 768px) {
-    .mobile-hint {
-      display: block;
-      background: #EFF6FF;
-      border-left: 4px solid #4D93D9;
-      border-radius: 8px;
-      padding: 10px 16px;
-      font-size: 13px;
-      color: #1a1a2e;
-      margin-bottom: 16px;
+    .hero-box { padding: 24px 20px; }
+    .hero-box h1 { font-size: 26px; }
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      text-align: center;
     }
+    .kpi-item { width: 100%; }
+    .kpi-num { font-size: 26px; }
   }
 </style>
 """, unsafe_allow_html=True)
@@ -92,8 +91,6 @@ proyecto = st.sidebar.radio("Sección", [
 
 st.sidebar.divider()
 st.sidebar.caption("🤖 Desarrollado con apoyo de IA")
-
-st.markdown('<div class="mobile-hint">☰ &nbsp;Toca la flecha <strong>▶</strong> arriba a la izquierda para expandir el menú de proyectos.</div>', unsafe_allow_html=True)
 
 st.divider()
 
