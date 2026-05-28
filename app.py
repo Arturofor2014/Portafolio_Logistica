@@ -3,14 +3,12 @@ import pandas as pd
 import numpy as np
 
 st.set_page_config(page_title="Portafolio · Arturo Aguilar", layout="wide", page_icon="🚚",
-                   initial_sidebar_state="expanded")
+                   initial_sidebar_state="collapsed")
 
 st.markdown("""
 <style>
-  /* Fondo blanco general */
   .stApp { background-color: #ffffff; }
 
-  /* Hero card */
   .hero-box {
     background: #ffffff;
     border: 1px solid #e0e7f0;
@@ -51,32 +49,12 @@ st.markdown("""
   .kpi-num { font-size: 32px; font-weight: 900; color: #4D93D9; line-height: 1; }
   .kpi-lbl { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
 
-  /* Separador de sección */
   .sec-title { font-size: 22px; font-weight: 800; color: #1a1a2e; margin-bottom: 4px; }
   .sec-sub { font-size: 13px; color: #888; margin-bottom: 20px; }
 
-  /* Hint en el botón expandir/colapsar sidebar */
-  [data-testid="collapsedControl"] { position: relative !important; overflow: visible !important; }
-  [data-testid="collapsedControl"]::after {
-    content: "Toca aquí";
-    position: absolute;
-    left: 48px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #4D93D9;
-    color: #fff;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 700;
-    white-space: nowrap;
-    pointer-events: none;
-    animation: hint-pulse 1.8s ease-in-out infinite;
-  }
-  @keyframes hint-pulse {
-    0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
-    50%       { opacity: 0.6; transform: translateY(-50%) scale(0.95); }
-  }
+  /* Ocultar sidebar completamente */
+  [data-testid="stSidebar"] { display: none; }
+  [data-testid="collapsedControl"] { display: none; }
 
   @media(max-width: 768px) {
     .hero-box { padding: 24px 20px; }
@@ -93,13 +71,8 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# ── SIDEBAR ───────────────────────────────────────────────────────────────────
-st.sidebar.markdown("### 👤 Arturo Aguilar")
-st.sidebar.caption("Senior Commercial & Financial Analytics Engineer · 7+ años")
-st.sidebar.divider()
-st.sidebar.markdown("**Navegación:**")
-
-proyecto = st.sidebar.radio("Sección", [
+# ── SECCIONES ─────────────────────────────────────────────────────────────────
+SECCIONES = [
     "🏠  Presentación",
     "1 · KPIs de Flota",
     "2 · Desempeño Proveedores",
@@ -110,11 +83,35 @@ proyecto = st.sidebar.radio("Sección", [
     "7 · Pipeline ETL",
     "8 · Reportes Automáticos",
     "9 · Costo-Servicio",
-])
+]
 
-st.sidebar.divider()
+if "proyecto" not in st.session_state:
+    st.session_state.proyecto = SECCIONES[0]
+
+# ── POPUP DE NAVEGACIÓN ───────────────────────────────────────────────────────
+@st.dialog("📋 Navegación")
+def abrir_menu():
+    st.markdown("**👤 Arturo Aguilar**")
+    st.caption("Senior Commercial & Financial Analytics Engineer · 7+ años")
+    st.divider()
+    for s in SECCIONES:
+        activo = s == st.session_state.proyecto
+        label = f"**→ {s}**" if activo else s
+        if st.button(label, use_container_width=True, key=f"nav_{s}"):
+            st.session_state.proyecto = s
+            st.rerun()
+
+# ── BARRA SUPERIOR ────────────────────────────────────────────────────────────
+col_btn, col_titulo = st.columns([1, 8])
+with col_btn:
+    if st.button("☰ Menú", use_container_width=True):
+        abrir_menu()
+with col_titulo:
+    st.markdown(f"**Sección actual:** {st.session_state.proyecto}")
 
 st.divider()
+
+proyecto = st.session_state.proyecto
 
 # ── 0 · PRESENTACIÓN ──────────────────────────────────────────────────────────
 if proyecto == "🏠  Presentación":
@@ -139,28 +136,15 @@ if proyecto == "🏠  Presentación":
         <span class="tag-ai">🤖 Potenciado con IA</span>
       </div>
       <div class="kpi-row">
-        <div class="kpi-item">
-          <div class="kpi-num">7+</div>
-          <div class="kpi-lbl">Experiencia en Análisis de Datos</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-num">9</div>
-          <div class="kpi-lbl">Proyectos en portafolio</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-num">3x</div>
-          <div class="kpi-lbl">Velocidad con IA</div>
-        </div>
-        <div class="kpi-item">
-          <div class="kpi-num">↑</div>
-          <div class="kpi-lbl">Orientado a impacto</div>
-        </div>
+        <div class="kpi-item"><div class="kpi-num">7+</div><div class="kpi-lbl">Experiencia en Análisis de Datos</div></div>
+        <div class="kpi-item"><div class="kpi-num">9</div><div class="kpi-lbl">Proyectos en portafolio</div></div>
+        <div class="kpi-item"><div class="kpi-num">3x</div><div class="kpi-lbl">Velocidad con IA</div></div>
+        <div class="kpi-item"><div class="kpi-num">↑</div><div class="kpi-lbl">Orientado a impacto</div></div>
       </div>
     </div>
     """, unsafe_allow_html=True)
-
     st.markdown("<br>", unsafe_allow_html=True)
-    st.info("👈 Selecciona un proyecto en el menú lateral para explorar los análisis.")
+    st.info("☰ Toca el botón Menú arriba para explorar los proyectos.")
 
 # ── 1 ─────────────────────────────────────────────────────────────────────────
 elif proyecto == "1 · KPIs de Flota":
