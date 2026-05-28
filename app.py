@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import pandas as pd
 import numpy as np
 
@@ -91,6 +92,17 @@ proyecto = st.sidebar.radio("Sección", [
 
 st.sidebar.divider()
 st.sidebar.caption("🤖 Desarrollado con apoyo de IA")
+
+components.html("""
+<script>
+  window.addEventListener('load', function() {
+    if (window.parent.innerWidth <= 768) {
+      var btn = window.parent.document.querySelector('[data-testid="collapsedControl"]');
+      if (btn) btn.click();
+    }
+  });
+</script>
+""", height=0)
 
 st.divider()
 
