@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit.components.v1 as components
 import pandas as pd
 import numpy as np
 
@@ -56,6 +55,29 @@ st.markdown("""
   .sec-title { font-size: 22px; font-weight: 800; color: #1a1a2e; margin-bottom: 4px; }
   .sec-sub { font-size: 13px; color: #888; margin-bottom: 20px; }
 
+  /* Hint en el botón expandir/colapsar sidebar */
+  [data-testid="collapsedControl"] { position: relative !important; overflow: visible !important; }
+  [data-testid="collapsedControl"]::after {
+    content: "Toca aquí";
+    position: absolute;
+    left: 48px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #4D93D9;
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+    pointer-events: none;
+    animation: hint-pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes hint-pulse {
+    0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+    50%       { opacity: 0.6; transform: translateY(-50%) scale(0.95); }
+  }
+
   @media(max-width: 768px) {
     .hero-box { padding: 24px 20px; }
     .hero-box h1 { font-size: 26px; }
@@ -92,17 +114,6 @@ proyecto = st.sidebar.radio("Sección", [
 
 st.sidebar.divider()
 st.sidebar.caption("🤖 Desarrollado con apoyo de IA")
-
-components.html("""
-<script>
-  window.addEventListener('load', function() {
-    setTimeout(function() {
-      var btn = window.parent.document.querySelector('[data-testid="collapsedControl"]');
-      if (btn) btn.click();
-    }, 300);
-  });
-</script>
-""", height=0)
 
 st.divider()
 
